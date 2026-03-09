@@ -1,0 +1,5 @@
+Data Peserta Sanbercode Bootcamp Laravel Web Dev
+1. Nama: Amsal Tampubolon
+2. Email: amsaltampubolon24@gmail.com
+3. Akun Gitlab: github.com/tuykul
+4. Akun Telegram: @IngfoTa
