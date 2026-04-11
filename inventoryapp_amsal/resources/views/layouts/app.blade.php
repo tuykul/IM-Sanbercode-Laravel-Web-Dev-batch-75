@@ -46,15 +46,31 @@
 
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-                            <span class="hide-menu">Form</span>
+                            <span class="hide-menu">MASTER</span>
+                        </li>
+                        @if(auth()->user()->role == 'admin')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ url('/category') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i> </span>
+                                <span class="hide-menu">Category</span>
+                            </a>
+                        </li>
+                        @endif
+                        <li class="sidebar-item">
+                            <a class="sidebar-link {{ Request::is('book') ? 'active' : '' }}"
+                                href="{{ url('/book') }}" aria-expanded="false">
+                                <span>
+                                    <iconify-icon icon="solar:box-bold-duotone" class="fs-6"></iconify-icon>
+                                </span>
+                                <span class="hide-menu">Book</span>
+                            </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link {{ Request::is('register') ? 'active' : '' }}"
-                                href="{{ url('/register') }}" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ url('/transaction') }}" aria-expanded="false">
                                 <span>
-                                    <iconify-icon icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
-                                </span>
-                                <span class="hide-menu">Form Input</span>
+                                    <i class="ti ti-layers-intersect"></i> </span>
+                                <span class="hide-menu">Transaction</span>
                             </a>
                         </li>
                     </ul>
@@ -88,13 +104,15 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="javascript:void(0)"
+                                        <a href="{{ url('/profile') }}"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">My Profile</p>
                                         </a>
-                                        <a href="{{ url('/login') }}"
-                                            class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                        <form action="{{ url('/logout') }}" method="POST" class="mx-3 mt-2 d-block">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-primary w-100">Logout</button>
+                                        </form>
                                     </div>
                                 </div>
                             </li>
@@ -103,7 +121,16 @@
                 </nav>
             </header>
             <!--  Header End -->
-
+            @if (session('success'))
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible fade show shadow-sm border-0" role="alert">
+                        <strong>Mantap!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="container-fluid">
                 @yield('content')
             </div>
